@@ -1,0 +1,88 @@
+{
+  "train_path": "D:\\Emergo\\xray\\xray\\random\\train",
+  "image_size": [224, 224],
+  "batch_size": 32,
+  "data_generator": {
+    "rescale": 0.00392156862745098,
+    "validation_split": 0.2
+  },
+  "train_generator": {
+    "target_size": [224, 224],
+    "batch_size": 32,
+    "class_mode": "binary",
+    "color_mode": "grayscale",
+    "subset": "training"
+  },
+  "validation_generator": {
+    "target_size": [224, 224],
+    "batch_size": 32,
+    "class_mode": "binary",
+    "color_mode": "grayscale",
+    "subset": "validation"
+  },
+  "model": {
+    "architecture": "Sequential",
+    "layers": [
+      {
+        "type": "Input",
+        "params": {
+          "shape": [224, 224, 1]
+        }
+      },
+      {
+        "type": "Conv2D",
+        "params": {
+          "filters": 32,
+          "kernel_size": [3, 3],
+          "activation": "relu"
+        }
+      },
+      {
+        "type": "MaxPooling2D"
+      },
+      {
+        "type": "Conv2D",
+        "params": {
+          "filters": 64,
+          "kernel_size": [3, 3],
+          "activation": "relu"
+        }
+      },
+      {
+        "type": "MaxPooling2D"
+      },
+      {
+        "type": "Flatten"
+      },
+      {
+        "type": "Dense",
+        "params": {
+          "units": 64,
+          "activation": "relu"
+        }
+      },
+      {
+        "type": "Dropout",
+        "params": {
+          "rate": 0.3
+        }
+      },
+      {
+        "type": "Dense",
+        "params": {
+          "units": 1,
+          "activation": "sigmoid"
+        }
+      }
+    ]
+  },
+  "compile": {
+    "optimizer": "adam",
+    "loss": "binary_crossentropy",
+    "metrics": ["accuracy"]
+  },
+  "fit": {
+    "epochs": 10
+  },
+  "save_model_path": "xray_vs_notxray_model"
+}
